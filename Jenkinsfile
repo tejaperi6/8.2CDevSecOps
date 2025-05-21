@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        RECIPIENTS = 'your_email@example.com'  // replace with your email
+        PATH = "/usr/local/bin:${env.PATH}"
+        RECIPIENTS = 'saiteja.phani@gmail.com'  // replace with your email
     }
 
     stages {
