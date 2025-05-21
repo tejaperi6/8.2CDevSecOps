@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PATH = "/usr/local/bin:${env.PATH}"
-        RECIPIENTS = 'saiteja.phani@gmail.com'  // replace with your email
+        RECIPIENTS = 'saiteja.phani@gmail.com'  // Replace with your email address
     }
 
     stages {
@@ -24,9 +24,9 @@ pipeline {
             post {
                 always {
                     emailext attachLog: true,
-                             subject: "Test Stage - Build ${currentBuild.fullDisplayName}",
-                             body: "The Test stage has completed. Please check the attached log.",
-                             recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                             subject: "Test Stage - Build ${currentBuild.fullDisplayName} - Status: ${currentBuild.currentResult}",
+                             body: """The Test stage has completed with status: ${currentBuild.currentResult}.
+Please check the attached console log for details.""",
                              to: "${RECIPIENTS}"
                 }
             }
@@ -43,9 +43,9 @@ pipeline {
             post {
                 always {
                     emailext attachLog: true,
-                             subject: "NPM Audit Stage - Build ${currentBuild.fullDisplayName}",
-                             body: "The NPM Audit stage has completed. Please check the attached log.",
-                             recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                             subject: "NPM Audit Stage - Build ${currentBuild.fullDisplayName} - Status: ${currentBuild.currentResult}",
+                             body: """The NPM Audit stage has completed with status: ${currentBuild.currentResult}.
+Please check the attached console log for details.""",
                              to: "${RECIPIENTS}"
                 }
             }
